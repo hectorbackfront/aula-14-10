@@ -1,0 +1,68 @@
+# Arquitetura de Referência - GameStream
+
+## 1️⃣ Divisão da Aplicação (Microsserviços e Desacoplamento)
+  
+**Microsserviço 1 (Função Crítica):**
+- Gerenciamento de Sessão de Usuário  
+  - Autentica jogadores e mantém sessões ativas.
+
+**Microsserviço 2 (Função Crítica):**
+- Catálogo de Jogos e Recomendação  
+  - Lista jogos e recomenda com base no histórico.
+
+**Mecanismo de Comunicação:**
+- Mensageria Assíncrona (ex: AWS SQS, Azure Service Bus, Google Pub/Sub)  
+  - Permite comunicação desacoplada e tolerante a falhas.
+
+---
+
+## 2️⃣ Alta Resiliência e Disponibilidade (Geografia)
+
+**Conceito de Distribuição:**  
+- Regiões e Zonas de Disponibilidade (AZs)
+
+**Justificativa:**  
+- Evita downtime mesmo com falha em um datacenter.  
+- Reduz latência distribuindo servidores perto dos usuários.
+
+---
+
+## 3️⃣ Escalabilidade de Tráfego (Entrada)
+
+**Serviço Necessário:**  
+- Balanceador de Carga (Load Balancer)
+
+**Função:**  
+- Distribui requisições entre servidores ativos.  
+- Evita sobrecarga e mantém desempenho.
+
+---
+
+## 4️⃣ Segurança por Design (Identity and Access)
+
+**Pilar de Segurança (Conceito):**  
+- Identity and Access Management (IAM)
+
+**Por que é crucial:**  
+- Garante que apenas microsserviços autorizados se comuniquem.  
+- Protege dados e mantém integridade do sistema.
+
+---
+
+## ✅ Resumo Visual Rápido
+
+| Item | Conceito / Serviço | Justificativa |
+|------|------------------|---------------|
+| Microsserviço 1 | Gerenciamento de Sessão de Usuário | Login e perfis, não afeta streaming direto |
+| Microsserviço 2 | Catálogo de Jogos / Recomendação | Falha não impacta streaming |
+| Comunicação | Fila Assíncrona (SQS, Pub/Sub) | Desacoplamento, tolerância a falhas |
+| Distribuição | Regiões + AZs | Alta disponibilidade e baixa latência |
+| Escalabilidade | Load Balancer | Distribui tráfego e evita sobrecarga |
+| Segurança | IAM / Identity & Access | Controle de acesso seguro entre microsserviços |
+
+---
+
+## 🧠 Autor
+**Hector M.**  
+🎓 Estudante de Análise e Desenvolvimento de Sistemas  
+📘 Projeto criado para fins acadêmicos e estudo de arquitetura distribuída.
